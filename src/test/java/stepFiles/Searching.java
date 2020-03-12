@@ -27,9 +27,6 @@ public class Searching {
         return CurrentUrl;
     }
 
-
-
-
     @Given("openDou")
     public void openDou(){
         //get to the dou page
@@ -37,7 +34,6 @@ public class Searching {
         String ExpectedUrl = "https://dou.ua";
         System.out.println("at the homepage: "+this.getUrl());
         Assert.assertTrue ("URLs do not match", this.getUrl().contains(ExpectedUrl));
-
     }
 
     @When("selectCalendar")
@@ -60,10 +56,17 @@ public class Searching {
             dnepr.click();
         }
 
+
+
         WebElement tagFilter = WebDriverHolder.getDriver().findElement(By.xpath("//select[@name='tag']"));
         tagFilter.click();
+        try{
+            sleep(2000);
+        }
+        catch (Exception e){
+        }
         List<WebElement> tagOption = WebDriverHolder.getDriver().findElements(By.xpath(".//option"));
-        WebElement QA = WebDriverHolder.getDriver().findElement(By.xpath(".//option[contains(text(),\"QA\")]"));
+        WebElement QA = WebDriverHolder.getDriver().findElement(By.xpath(".//option[contains(text(),\"Java\")]"));
         if (tagOption.contains(QA)) {
             QA.click();
         }
@@ -85,12 +88,10 @@ public class Searching {
         for (WebElement e : events) {
             String name = e.getText();
 
-            if (name.contains("utomation")) {
-                events.forEach(event -> {
-                    System.out.println("found: " + e.getText());
-                    String link = WebDriverHolder.getDriver().findElement(By.cssSelector("h2.title a")).getAttribute("href");
-                    System.out.println("link: "+link);
-                });
+            if (name.contains("ava")) {
+                System.out.println("found: " + e.getText());
+                String link = e.findElement(By.cssSelector("a")).getAttribute("href");
+                System.out.println("link: "+link);
             }
         }
         try {
