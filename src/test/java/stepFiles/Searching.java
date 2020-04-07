@@ -66,7 +66,7 @@ public class Searching {
         catch (Exception e){
         }
         List<WebElement> tagOption = WebDriverHolder.getDriver().findElements(By.xpath(".//option"));
-        WebElement QA = WebDriverHolder.getDriver().findElement(By.xpath(".//option[contains(text(),\"Java\")]"));
+        WebElement QA = WebDriverHolder.getDriver().findElement(By.xpath(".//option[contains(text(),\"QA\")]"));
         if (tagOption.contains(QA)) {
             QA.click();
         }
@@ -82,13 +82,12 @@ public class Searching {
         assertThat(getUrl().contains("https://dou.ua/calendar/tags/QA/%D0%94%D0%BD%D0%B5%D0%BF%D1%80/"));
         List<WebElement> events = WebDriverHolder.getDriver().findElements(By.cssSelector("h2.title"));
         System.out.println("all events found: " + events.size());
-        List<WebElement> evLinks = WebDriverHolder.getDriver().findElements(By.cssSelector("h2.title a"));
 
         //getting names of the events and grouping those by relation to automation
         for (WebElement e : events) {
             String name = e.getText();
 
-            if (name.contains("ava")) {
+            if (name.contains("utomation")) {
                 System.out.println("found: " + e.getText());
                 String link = e.findElement(By.cssSelector("a")).getAttribute("href");
                 System.out.println("link: "+link);
@@ -102,22 +101,6 @@ public class Searching {
         }
 
 
-//        for (WebElement e : events) {
-//            String name = e.getText();
-//            if (name.contains("utomation")) {
-//                for (WebElement l : evLinks) {
-//                    // getting links of the events
-//                    String link = l.getAttribute("href");
-//                    System.out.println("automation related events: " + link);
-//                    break;
-//                }
-//
-//                if (!name.contains("utomation")) {
-//                    System.out.println("other events: " + name);
-//                    break;
-//                }
-//            }
-//        }
     }
 
     @After
